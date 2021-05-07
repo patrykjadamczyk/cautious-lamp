@@ -12,20 +12,8 @@ jobs:
     - uses: actions/checkout@v2
     - name: Build the Docker image
       run: time docker build . --file Dockerfile --tag test:dev
-  build-macos:
-    runs-on: macOS-latest
-    steps:
-    - uses: actions/checkout@v2
-    - name: Build the Docker image
-      run: time docker build . --file Dockerfile --tag test:dev
   buildkit-linux:
     runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v2
-    - name: Build the Docker image
-      run: DOCKER_BUILDKIT=1 time docker build . --file Dockerfile --tag test:dev
-  buildkit-macos:
-    runs-on: macOS-latest
     steps:
     - uses: actions/checkout@v2
     - name: Build the Docker image
