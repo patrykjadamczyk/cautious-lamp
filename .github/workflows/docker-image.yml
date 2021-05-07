@@ -35,10 +35,12 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Build the Docker image
-      run: DOCKER_BUILDKIT=1 time docker build . --file Dockerfile --tag test:dev
+      env: 
+        DOCKER_BUILDKIT: '1'
+      run: Measure-Command { docker build . --file Dockerfile --tag test:dev | Out-Default }
   buildkit-macos:
     runs-on: macOS-latest
     steps:
     - uses: actions/checkout@v2
     - name: Build the Docker image
-      run: DOCKER_BUILDKIT=1 Measure-Command { docker build . --file Dockerfile --tag test:dev | Out-Default }
+      run: DOCKER_BUILDKIT=1 time docker build . --file Dockerfile --tag test:dev
