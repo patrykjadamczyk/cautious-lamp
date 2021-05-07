@@ -1,4 +1,2 @@
 FROM ubuntu:latest
-RUN apt update
-RUN apt install -y vim
-RUN apt install -y python3
+RUN apt update && apt install -y vim && apt install -y python3
