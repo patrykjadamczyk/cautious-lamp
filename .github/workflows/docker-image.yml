@@ -1,0 +1,44 @@
+name: Docker Image CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+jobs:
+  build-linux:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Build the Docker image
+      run: time docker build . --file Dockerfile --tag test:$(date +%s)
+  build-windows:
+    runs-on: windows-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Build the Docker image
+      run: time docker build . --file Dockerfile --tag test:$(date +%s)
+  build-macos:
+    runs-on: macOS-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Build the Docker image
+      run: time docker build . --file Dockerfile --tag test:$(date +%s)
+  buildkit-linux:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Build the Docker image
+      run: DOCKER_BUILDKIT=1 time docker build . --file Dockerfile --tag test:$(date +%s)
+  buildkit-windows:
+    runs-on: windows-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Build the Docker image
+      run: DOCKER_BUILDKIT=1 time docker build . --file Dockerfile --tag test:$(date +%s)
+  buildkit-macos:
+    runs-on: macOS-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Build the Docker image
+      run: DOCKER_BUILDKIT=1 time docker build . --file Dockerfile --tag test:$(date +%s)
